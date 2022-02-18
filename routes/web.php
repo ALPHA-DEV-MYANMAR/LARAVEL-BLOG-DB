@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ use App\Http\Controllers\PhotoController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/show-all-post',[ClientController::class,'ShowAllPost'])->name('show-all-post');
+Route::get('/show-post-by-category/{id}',[ClientController::class,'ShowPostByCategory'])->name('show-post-by-category');
 
 Auth::routes();
 

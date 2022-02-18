@@ -32,6 +32,14 @@
                             <p class='text-danger'>{{ $message }}</p>
                             @enderror
 
+                            <div class="m-2 ">
+                                <label for="">Post Price</label>
+                                <input type="number" name='price' value="{{ old('price') }}" class="form-control @error('price') is-invalid @enderror" >
+                            </div>
+                            @error('price')
+                            <p class='text-danger'>{{ $message }}</p>
+                            @enderror
+
                             <div class="m-2">
                                 <label for="">Post Description</label>
                                 <textarea  id="" cols="30" rows="5" name='description' class='form-control @error('description') is-invalid  @enderror' placeholder='enter description'>{{ old('description') }}</textarea>

@@ -53,7 +53,9 @@
                     @foreach(\App\Models\Category::all() as $category)
                         <div class="col-12 col-lg-2 mt-2 mt-lg-0">
                             <div class="category-card">
-                                {{ $category->name }}
+                                <a href="{{ route('show-post-by-category',$category->id) }}">
+                                    {{ $category->name }}
+                                </a>
                             </div>
                         </div>
                     @endforeach
@@ -64,7 +66,7 @@
     </div>
 {{--    Categories--}}
 
-{{--    Items--}}
+{{--    Post --}}
     <div class="row">
         <div class="col-12">
             <div class="header-text">
@@ -73,18 +75,34 @@
             <div>
                 <div class="row">
 
-                    <div class="col-12 col-lg-4">
-                        <div class="item-card">
-                            <div class="item-card-img">
-                                <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" width="100px" alt="">
+                    @foreach(\App\Models\Post::all() as $post)
+
+                        <div class="col-12 col-lg-3">
+                            <div class="item-card">
+                                <div class="item-card-img">
+                                    @forelse($post->photos()->latest('id')->limit(1)->get() as $photo)
+                                        <img src="{{ asset('storage/thumbnail/'.$photo->name) }}" />
+                                    @empty
+                                        <p class="text-muted">No Photo</p>
+                                    @endforelse
+                                </div>
+                                <div>
+                                    <span>{{ $post->title }}</span>
+                                    <br>
+                                    {{ $post->price }} $
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                    @endforeach
 
                 </div>
             </div>
         </div>
     </div>
-{{--    Items--}}
+{{--    Post --}}
+
+    <a href="{{ route('show-all-post') }}">show all post</a>
 
 </div>
+

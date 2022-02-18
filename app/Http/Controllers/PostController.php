@@ -53,11 +53,12 @@ class PostController extends Controller
             'category_id' => 'required|integer|exists:categories,id',
             'photo' => 'required',
             'photo.*' => 'required|file|mimes:jpg,png',
+            'price' => 'required|integer'
         ]);
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
+        $post->price = $request->price;
         $post->description = $request->description;
         $post->excerpt =  Str::limit($request->description,100);
         $post->category_id = $request->category_id;
@@ -133,7 +134,7 @@ class PostController extends Controller
         ]);
 
         $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
+        $post->price = $request->price;
         $post->description = $request->description;
         $post->excerpt =  Str::limit($request->description,100);
         $post->category_id = $request->category_id;
